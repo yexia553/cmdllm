@@ -272,6 +272,23 @@ Context has been successfully cleared.
 - 某些操作可能需要管理员权限。
 - **大模型生成的命令在执行之前由大模型判断是否具有危险，这个过程存在一定的安全问题**
 
+## 博客
+
+这是我的个人博客: [https://panzhixiang.cn](https://panzhixiang.cn)
+
+## 其他我开发的产品/工具
+
+1. 这P班上的值不值
+
+   <img src="./images/preview.jpg" alt="这P班上的值不值" style="width: 30%; height: auto;">
+ 
+   网页版：[https://jobworth.panzhixiang.cn/](https://jobworth.panzhixiang.cn/)  
+   微信小程序版：   
+   <img src="./images/miniprogram_code.png" alt="这P班上的值不值" style="width: 30%; height: auto;">
+
+2. 大模型多智能体信息网站
+
+    [https://llmmultiagents.com/](https://llmmultiagents.com/)
 
 ## 许可证
 
