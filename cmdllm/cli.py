@@ -26,8 +26,9 @@ def cli(ctx):
 @click.option('-t', '--tool', 'tool_type', required=True, help='Specify the tool type for the chat session (e.g., bash, kubectl).')
 def chat(tool_type):
     """Start an interactive chat session for a specific tool type."""
+    config = Config() # Load configuration first
+
     try:
-        config = Config() # Load configuration first
         # Validate tool type is available
         config.get_tool_config(tool_type) # Will raise ValueError if not available
     except ValueError as e:
@@ -44,7 +45,7 @@ def chat(tool_type):
         click.echo(click.style(f"LLM initialization error: {e}", fg='red'))
         return
 
-    command_executor = CommandExecutor(config)
+    command_executor = CommandExecutor(tool_type)
 
     click.echo(f"Starting interactive {tool_type} session. Type 'exit' or 'quit' to end.")
     click.echo("-----------------------------------------------------")

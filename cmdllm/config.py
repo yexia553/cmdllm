@@ -74,7 +74,10 @@ class Config:
         Returns:
             dict: Tool configuration
         """
-        tools = self.config.get('tools', ['bash'])
+        tools = self.config.get('tools')
+
+        if not tools:
+            raise ValueError("No tools configured")
         
         if tool_type and tool_type not in tools:
             raise ValueError(f"Tool {tool_type} is not available")
@@ -87,7 +90,7 @@ class Config:
         Returns:
             list: List of available tools
         """
-        return self.config.get('tools', ['bash'])
+        return self.config.get('tools')
         
     def add_tool(self, tool_name):
         """Add a tool to the available tools list.

@@ -84,7 +84,7 @@ class LLMProcessor:
             ANSWER: <your detailed explanation>
 
             IMPORTANT: Only provide the command or the answer, following the exact format. Do not add extra explanations unless asked.
-            Respond in Chinese.
+            IMPORTANT: Respond in User's language.
             """
 
     def process_query(self, query, context=None):

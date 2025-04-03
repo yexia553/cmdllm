@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cmdllm"
-version = "0.1.0"
-description = "使用自然语言与命令行工具交互的智能接口"
+version = "0.1.2"
+description = "Use natural language to operate all command-line tools"
 readme = "README.md"
 authors = [
     {name = "Zhixiang Pan", email = "pzx553@gmail.com"}
@@ -13,7 +13,7 @@ authors = [
 license = {text = "MIT"}
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
 ]
 keywords = ["cli", "command-line", "llm", "ai"]

@@ -12,15 +12,14 @@ import shlex
 class CommandExecutor:
     """Executes tool commands and handles their output."""
     
-    def __init__(self, config):
+    def __init__(self, tool_type):
         """
         Initialize the command executor.
         
         Args:
-            config (Config): The configuration object.
+            tool_type (str): The type of the tool (e.g., 'bash', 'kubectl', 'podman').
         """
-        self.tool_config = config.get_tool_config()
-        self.tool_type = self.tool_config['type']  # Will raise KeyError if invalid
+        self.tool_type = tool_type  # Use the provided tool_type
 
     def execute(self, command, is_dangerous=False):
         """

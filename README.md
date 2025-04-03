@@ -1,29 +1,31 @@
 # CMDLLM
 
-cmdllm 是一个使用自然语言与命令行工具交互的智能接口。它支持**任何**命令行工具，如 bash、kubectl、ros2 等。它利用大型语言模型 (LLM) 将你的自然语言查询转换为相应的命令，并提供执行这些命令的选项。
+[中文](./README-zh.md)
 
-> 开发这个工具最初的目的是为了帮助我自己快速使用podman命令行而开发的，由于新公司不能使用 docker命令行，从 docker 切换成 podman 一直不太习惯，就尝试开发这个工具，经过几次更新之后决定开源出来，希望正在阅读这段文字的你也会有用。
+CMDLLM is an intelligent interface for interacting with command-line tools using natural language. It supports **any** command-line tool, such as bash, kubectl, ros2, etc. It leverages Large Language Models (LLM) to translate your natural language queries into corresponding commands and provides options to execute these commands.
 
-## 功能
+> The original purpose of developing this tool was to help myself quickly use the podman command line. Since my new company doesn't allow the use of docker commands, I was struggling to adapt from docker to podman. So I tried to develop this tool, and after several updates, I decided to open-source it. I hope it will be useful to you.
 
-* **多工具支持**: 支持任何命令行工具，如 Bash、kubectl、ros2、docker 等。
-* **自然语言处理**: 将日常语言翻译成对应工具的命令。
-* **命令执行**: 可以选择直接执行建议的命令。
-* **上下文管理**: 维护对话历史，以支持更复杂的交互。
-* **安全提示**: 对可能危险的操作（如删除数据）进行警告和确认。
-* **交互式会话**: 支持交互式会话模式和单次查询模式。
-* **命令行配置**: 提供方便的命令行配置管理，无需手动编辑配置文件。
-* **多 LLM 提供商**: 支持兼容 OpenAI API 的服务和 Azure OpenAI 服务（如 OpenAI、DeepSeek 等）。
+## Features
 
-## 安装
+* **Multi-tool Support**: Works with any command-line tool, such as Bash, kubectl, ros2, docker, etc.
+* **Natural Language Processing**: Translates everyday language into corresponding tool commands.
+* **Command Execution**: Offers the option to directly execute suggested commands.
+* **Context Management**: Maintains conversation history to support more complex interactions.
+* **Safety Prompts**: Provides warnings and confirmations for potentially dangerous operations (like deleting data).
+* **Interactive Sessions**: Supports both interactive session mode and one-time query mode.
+* **Command-line Configuration**: Provides convenient command-line configuration management without the need to manually edit configuration files.
+* **Multiple LLM Providers**: Supports OpenAI API-compatible services and Azure OpenAI services (such as OpenAI, DeepSeek, etc.).
 
-### 从 PyPI 安装
+## Installation
+
+### From PyPI
 
 ```bash
 pip install cmdllm
 ```
 
-### 从源代码安装
+### From Source Code
 
 ```bash
 git clone https://github.com/yexia553/cmdllm.git
@@ -31,29 +33,30 @@ cd cmdllm
 pip install -e .
 ```
 
-## 使用
+## Usage
 
-### 基本使用
+### Basic Usage
 
-CMDLLM 提供了交互式会话模式：
+CMDLLM provides an interactive session mode:
 
-#### 交互式会话模式
+#### Interactive Session Mode
 
-启动一个与特定工具的交互式会话：
+Start an interactive session with a specific tool:
 
 ```bash
 cmdllm chat -t bash
 ```
 
-这将启动一个交互式会话，你可以连续输入多个查询，程序会保持上下文。输入 `exit` 或 `quit` 退出会话。
+This will start an interactive session where you can input multiple queries continuously, and the program will maintain the context. Type `exit` or `quit` to end the session.
 
-#### bash 交互式会话示例
+#### Bash Interactive Session Example
 
 ```bash
 $ cmdllm chat -t bash
+
 Starting interactive bash session. Type 'exit' or 'quit' to end.
 -----------------------------------------------------
-bash> 列出当前目录中的所有文件
+bash> List all files in the current directory
 Processing your query...
 
 Suggested command:
@@ -69,7 +72,8 @@ drwxr-xr-x  25 user  staff   800  5 Jun 14:22 ..
 ...
 
 -----------------------------------------------------
-bash> 创建一个名为test的目录
+bash> Create a directory named test
+
 Processing your query...
 
 Suggested command:
@@ -82,13 +86,14 @@ bash> exit
 Exiting chat session.
 ```
 
-#### kubectl 交互式会话示例
+#### Kubectl Interactive Session Example
 
 ```bash
 $ cmdllm chat -t kubectl
+
 Starting interactive kubectl session. Type 'exit' or 'quit' to end.
 -----------------------------------------------------
-kubectl> 列出所有的命名空间
+kubectl> List all namespaces
 Processing your query...
 
 Suggested command:
@@ -101,7 +106,7 @@ kube-node-lease   Active   45d
 kube-public       Active   45d
 kube-system       Active   45d
 -----------------------------------------------------
-kubectl> 查看 default 命名空间中的所有 pod
+kubectl> Show all pods in the default namespace
 Processing your query...
 
 Suggested command:
@@ -112,7 +117,8 @@ NAME                           READY   STATUS    RESTARTS   AGE
 nginx-deployment-66b6c48dd5-8ph2j   1/1     Running   0          24h
 nginx-deployment-66b6c48dd5-vb6l8   1/1     Running   0          24h
 -----------------------------------------------------
-kubectl> 描述第一个 nginx pod
+kubectl> Describe the first nginx pod
+
 Processing your query...
 
 Suggested command:
@@ -138,98 +144,98 @@ kubectl> exit
 Exiting chat session.
 ```
 
-## 配置
+## Configuration
 
-CMDLLM 提供了便捷的命令行配置管理，无需手动编辑配置文件。
+CMDLLM provides convenient command-line configuration management without the need to manually edit configuration files.
 
-### 交互式配置
+### Interactive Configuration
 
-最简单的方式是使用交互式配置命令来设置 LLM 提供商：
+The simplest way is to use the interactive configuration command to set up the LLM provider:
 
 ```bash
 cmdllm config setup
 ```
 
-这将引导你设置所有必要的 LLM 配置项，如 API 密钥、端点、模型或部署名称。你可以选择使用兼容 OpenAI API 的服务或 Azure OpenAI 服务。
+This will guide you through setting up all necessary LLM configuration items, such as API keys, endpoints, model or deployment names. You can choose to use either OpenAI API-compatible services or Azure OpenAI services.
 
-### 命令行工具管理
+### Command-line Tool Management
 
-CMDLLM 提供了专门的命令用于管理可用的命令行工具:
+CMDLLM provides dedicated commands for managing available command-line tools:
 
 ```bash
-# 查看所有可用的工具
+# View all available tools
 cmdllm tools list
 
-# 添加新工具
+# Add a new tool
 cmdllm tools add kubectl
 
-# 删除工具
+# Remove a tool
 cmdllm tools del kubectl
 ```
 
-### 配置 Azure OpenAI
+### Configuring Azure OpenAI
 
-`cmdllm config setup` 可以帮助你交互是配置，但是如果你想单独配置或者修改某一个选项，可以使用以下命令手动配置：
+`cmdllm config setup` can help you configure interactively, but if you want to configure or modify a single option, you can use the following commands to configure manually:
 
 ```bash
-# 设置 LLM 提供商为 Azure
+# Set LLM provider to Azure
 cmdllm config set llm_provider azure
 
-# 配置 Azure OpenAI 参数，记得把最后的值换成你的真实值
+# Configure Azure OpenAI parameters, remember to replace the values with your actual values
 cmdllm config set azure.api_key YOUR_AZURE_API_KEY
 cmdllm config set azure.endpoint https://your-resource-name.openai.azure.com
 cmdllm config set azure.deployment your-deployment-name
 cmdllm config set azure.api_version 2023-05-15
 ```
 
-### 配置兼容 OpenAI API 的服务
+### Configuring OpenAI API-compatible Services
 
-如果你想使用兼容 OpenAI API 的服务（如 OpenAI、DeepSeek 等）：
+If you want to use OpenAI API-compatible services (such as OpenAI, DeepSeek, etc.):
 
 ```bash
-# 设置 LLM 提供商为 OpenAI 兼容
+# Set LLM provider to OpenAI compatible
 cmdllm config set llm_provider openai_compatible
 
-# 配置 OpenAI 兼容参数，记得把最后的值换成你的真实值
+# Configure OpenAI compatible parameters, remember to replace the values with your actual values
 cmdllm config set openai_compatible.api_key YOUR_API_KEY
 cmdllm config set openai_compatible.base_url https://api.openai.com/v1
 cmdllm config set openai_compatible.model gpt-3.5-turbo
 ```
 
-### 管理上下文消息数量
+### Managing Context Message Count
 
-你可以设置对话中携带的最大消息数量，默认是 20：
+You can set the maximum number of messages carried in the conversation, default is 20:
 
 ```bash
-# 设置上下文消息数量
+# Set context message count
 cmdllm config set-context-messages 10
 
-# 查看当前上下文消息设置
+# View current context message setting
 cmdllm config get-context-messages
 ```
 
-### 查看当前配置
+### View Current Configuration
 
 ```bash
 cmdllm config list
 ```
 
-### 获取单个配置项
+### Get Individual Configuration Item
 
 ```bash
 cmdllm config get llm_provider
 cmdllm config get azure.endpoint
 ```
 
-### 重置配置
+### Reset Configuration
 
 ```bash
 cmdllm config init
 ```
 
-### 手动编辑配置文件
+### Manually Edit Configuration File
 
-如果你仍然想手动编辑配置文件，CMDLLM 的配置文件位于 `~/.cmdllm/config.yaml`：
+If you still want to manually edit the configuration file, CMDLLM's configuration file is located at `~/.cmdllm/config.yaml`:
 
 ```yaml
 tools:
@@ -237,42 +243,40 @@ tools:
 - kubectl
 - ros2
 
-llm_provider: openai_compatible  # 使用的 LLM 提供商: openai_compatible 或 azure
+llm_provider: openai_compatible  # LLM provider being used: openai_compatible or azure
 
 openai_compatible:
-  base_url: https://api.openai.com/v1  # OpenAI 兼容 API 端点
-  api_key: 你的API密钥  # API 密钥
-  model: gpt-3.5-turbo  # 使用的模型
+  base_url: https://api.openai.com/v1  # OpenAI compatible API endpoint
+  api_key: your_API_key  # API key
+  model: gpt-3.5-turbo  # Model being used
 
 azure:
-  api_key: 你的Azure密钥  # Azure OpenAI API 密钥
-  endpoint: https://your-resource-name.openai.azure.com  # Azure 端点
-  deployment: your-deployment-name  # Azure 模型部署名称
-  api_version: 2023-05-15  # Azure API 版本
+  api_key: your_Azure_key  # Azure OpenAI API key
+  endpoint: https://your-resource-name.openai.azure.com  # Azure endpoint
+  deployment: your-deployment-name  # Azure model deployment name
+  api_version: 2023-05-15  # Azure API version
 
 context:
-  max_messages: 10  # 保存在上下文中的最大消息数量
+  max_messages: 10  # Maximum number of messages saved in context
 ```
 
-支持的 LLM 服务：
-- 兼容 OpenAI API 的服务（如 OpenAI、DeepSeek 等）
+Supported LLM services:
+- OpenAI API-compatible services (such as OpenAI, DeepSeek, etc.)
 - Azure OpenAI
 
-
-## 清除上下文
+## Clearing Context
 
 ```bash
 $ cmdllm clear
 Context has been successfully cleared.
 ```
 
-## 注意事项
+## Notes
 
-- 使用前需确保相应的命令行工具已经安装在你的系统上并在 PATH 中可用。
-- 某些操作可能需要管理员权限。
-- **大模型生成的命令在执行之前由大模型判断是否具有危险，这个过程存在一定的安全问题**
+- Before use, ensure that the corresponding command-line tools are installed on your system and available in the PATH.
+- Some operations may require administrator privileges.
+- **Commands generated by large language models are assessed for risk by the model itself before execution, but this process has certain security issues**
 
+## License
 
-## 许可证
-
-本项目采用 Apache 2.0 许可证 - 详情请见 [LICENSE](./LICENSE) 文件。
+This project is licensed under the Apache 2.0 License - see the [LICENSE](./LICENSE) file for details. 
