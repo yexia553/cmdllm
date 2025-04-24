@@ -27,7 +27,7 @@ class ContextManager:
     def _load_context(self):
         """Load context from file."""
         try:
-            with open(self.context_file, 'r') as f:
+            with open(self.context_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             # Handle cases where file doesn't exist or is empty/corrupt
