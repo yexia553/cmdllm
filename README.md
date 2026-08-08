@@ -2,6 +2,9 @@
 
 [中文](./README-zh.md)
 
+> [!IMPORTANT]
+> **Maintenance mode:** CMDLLM is maintained for critical bug fixes and compatibility updates, but active feature development is currently paused.
+
 CMDLLM is an intelligent interface for interacting with command-line tools using natural language. It supports **any** command-line tool, such as bash, kubectl, ros2, etc. It leverages Large Language Models (LLM) to translate your natural language queries into corresponding commands and provides options to execute these commands.
 
 > The original purpose of developing this tool was to help myself quickly use the podman command line. Since my new company doesn't allow the use of docker commands, I was struggling to adapt from docker to podman. So I tried to develop this tool, and after several updates, I decided to open-source it. I hope it will be useful to you.
@@ -297,4 +300,4 @@ here is my personal blog: [https://panzhixiang.cn](https://panzhixiang.cn)
 
 ## License
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](./LICENSE) file for details. 
+This project is licensed under the Apache 2.0 License - see the [LICENSE](./LICENSE) file for details.
